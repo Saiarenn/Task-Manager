@@ -1,0 +1,13 @@
+:root {
+    --mainBlue: #5051F9;
+    --navbg: white;
+    --logbtn: #3484F4;
+    --blue: #23235F;
+    --menubg: #FBFAFF;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}

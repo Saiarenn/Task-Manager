@@ -1,0 +1,28 @@
+.vertical-menu {
+    width: 94px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--menubg);
+}
+
+.vertical-menu a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.vertical-menu a:hover {
+    background: var(--mainBlue);
+}
+
+.vertical-menu a:hover svg path {
+    fill: white;
+}
