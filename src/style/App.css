@@ -4,10 +4,27 @@
     --logbtn: #3484F4;
     --blue: #23235F;
     --menubg: #FBFAFF;
+    --desciption: #768396;
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf') format('ttf'),
+    url('../fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
+button {
+    cursor: pointer;
 }

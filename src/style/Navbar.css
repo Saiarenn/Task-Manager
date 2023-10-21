@@ -5,7 +5,6 @@ nav {
     flex-direction: row;
     align-items: center;
     background: var(--navbg);
-    font-family: 'Raleway', serif;
     justify-content: end;
 }
 
@@ -36,7 +35,6 @@ nav {
     width: 10%;
     border: none;
     background: transparent;
-    cursor: pointer;
 }
 
 .navlinks {
