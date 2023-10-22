@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style/VerticalMenu.css'
 import {CALENDAR_ROUTE, TASKS_ROUTE} from "./utils/consts";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const VerticalMenu = () => {
     const menuItems = [
@@ -59,11 +59,13 @@ const VerticalMenu = () => {
 
     ];
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <div className="vertical-menu">
             {menuItems.map((menuItem, index) => (
-                <a key={index} onClick={() => navigate(menuItem.link)}>
+                <a key={index} className={location.pathname === menuItem.link ? "active" : ''}
+                   onClick={() => navigate(menuItem.link)}>
                     {menuItem.name}
                 </a>
             ))}

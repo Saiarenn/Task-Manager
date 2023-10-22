@@ -1,18 +1,21 @@
 import VerticalMenu from "./components/VerticalMenu";
 import Navbar from "./components/Navbar";
-import Calendar from "./pages/Calendar";
 import './style/App.css'
+import {BrowserRouter} from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 
 function App() {
-  return (
-    <div className="" style={{display: "flex", background: "#F3F4F8"}}>
-      <VerticalMenu/>
-        <div style={{display: "flex", flexDirection: "column", width: '100%'}}>
-            <Navbar/>
-            <Calendar/>
-        </div>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div style={{display: "flex", background: "#F3F4F8"}}>
+                <VerticalMenu/>
+                <div style={{width: '100%'}}>
+                    <Navbar/>
+                    <AppRouter/>
+                </div>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

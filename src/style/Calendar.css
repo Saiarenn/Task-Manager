@@ -15,9 +15,25 @@
     height: 100%;
 }
 
-/*.fc {*/
-/*    max-height: calc(100vh - 80px);*/
-/*}*/
+.fc-header-toolbar {
+    padding: 25px 15px;
+}
+
+.fc h2{
+    text-decoration: none;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+.fc button{
+    text-decoration: none;
+    background: var(--blue);
+}
+
+.fc a{
+    text-decoration: none;
+    color: var(--blue);
+}
 
 .event-content {
     display: flex;
