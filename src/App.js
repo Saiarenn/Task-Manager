@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
             <div style={{display: "flex", background: "#F3F4F8"}}>
                 <VerticalMenu/>
-                <div style={{width: '94px'}}></div>
+                <div style={{width: '100px'}}></div>
                 <div style={{width: '100%'}}>
                     <Navbar/>
                     <AppRouter/>

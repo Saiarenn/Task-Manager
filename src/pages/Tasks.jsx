@@ -9,21 +9,24 @@ import {Context} from "../index";
 
 const Tasks = observer(() => {
     const {task} = useContext(Context)
+
+    const tasksByStatus = task.tasks.reduce((accumulator, task) => {
+        const { status } = task;
+
+        accumulator[status] = accumulator[status] || [];
+        accumulator[status].push(task);
+
+        return accumulator;
+    }, {});
+
     const [heads, setHeads] = useState([
-        {title: "Backlog", tasks: []},
-        {title: "To Do", tasks: []},
-        {title: "In Progress", tasks: []},
-        {title: "Review", tasks: []},
+        {title: "Backlog", tasks: tasksByStatus['Backlog'] || []},
+        {title: "To Do", tasks: tasksByStatus['To Do'] || []},
+        {title: "In Progress", tasks: tasksByStatus['In Progress'] || []},
+        {title: "Review", tasks: tasksByStatus['Review'] || []},
     ])
     const [visible, setVisible] = useState(false);
     const [showModal, setShowModal] = useState('');
-
-    // const addTaskToColumn = (columnId, newTask) => {
-    //     const targetColumn = heads.find(column => column.id === columnId);
-    //
-    //     targetColumn.tasks.push(newTask);
-    // };
-
 
     const openModal = (title) => {
         setVisible(true)
@@ -50,7 +53,7 @@ const Tasks = observer(() => {
             <h1>Task</h1>
 
             <div className={'task-wrapper'}>
-                {task.tasks.map((head) => (
+                {heads.map((head) => (
                     <div className={'task-column'} key={head.title}>
                         <div className={'task-header'}>
 
@@ -80,7 +83,7 @@ const Tasks = observer(() => {
 
                         {head.tasks.map(task => (
                             <div className={'task-item'} key={task.id}>
-                                <div className={'task-item-type'}>
+                                <div className={`task-item-type  ${task.type}`}>
                                     {task.type}
                                 </div>
                                 {
@@ -99,7 +102,7 @@ const Tasks = observer(() => {
                                 </div>
 
                                 <div className={'task-item-date'}>
-                                    {formatDate(task.date)}
+                                    {formatDate(task.start)}
                                 </div>
                             </div>
                         ))}

@@ -1,31 +1,38 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Button, Form} from "react-bootstrap";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
 
-const TaskModal = ({head, show, onHide}) => {
-    const [task, setTask] = useState({type: 'Design', title: '', description: '', date: Date.now(), img: ''})
+const TaskModal = observer(({head, show, onHide, add}) => {
+    const {task} = useContext(Context);
+    const [event, setEvent] = useState({
+        status: head.title, type: 'Design', title: '', description: '', start: Date.now(), img: ''
+    })
     const [errorMessage, setErrorMessage] = useState('');
 
     const addTask = () => {
-        head.tasks.push({...task, id: Date.now()});
+        setEvent({...event, id: Date.now()});
+        head.tasks.push(event);
+        task.tasks.push(event);
         onHide();
-        setTask({type: 'Design', title: '', description: '', date: Date.now(), img: ''})
+        setEvent({...event, type: 'Design', title: '', description: '', start: Date.now(), img: ''})
     }
 
-    const fileChange = (event) => {
-        const file = event.target.files[0];
+    const fileChange = (e) => {
+        const file = e.target.files[0];
         setErrorMessage('');
 
         if (file.size < 2 * 1024 * 1024) {
             const reader = new FileReader();
             reader.onload = () => {
-                setTask({...task, img: reader.result});
+                setEvent({...event, img: reader.result});
             };
             reader.readAsDataURL(file);
         } else {
             setErrorMessage('File Size Exceeds 2mb');
         }
-        if (!event.target.value.match(/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/)) {
+        if (!e.target.value.match(/(\.jpg|\.png|\.JPG|\.PNG|\.jpeg|\.JPEG)$/)) {
             setErrorMessage('Invalid File Type');
         }
     };
@@ -46,7 +53,7 @@ const TaskModal = ({head, show, onHide}) => {
                     <Form>
                         <Form.Select className={'mb-2'} aria-label="Default select example"
                                      value={task.type}
-                                     onChange={e => setTask({...task, type: e.target.value})}
+                                     onChange={e => setEvent({...event, type: e.target.value})}
                         >
                             <option value="Design">Design</option>
                             <option value="Research">Research</option>
@@ -57,14 +64,14 @@ const TaskModal = ({head, show, onHide}) => {
                             className={'mb-2'}
                             placeholder={"Enter the Title"}
                             value={task.title}
-                            onChange={e => setTask({...task, title: e.target.value})}
+                            onChange={e => setEvent({...event, title: e.target.value})}
                         />
                         <Form.Control
                             className={'mb-2'}
                             as="textarea"
                             placeholder={"Enter the Description"}
                             value={task.description}
-                            onChange={e => setTask({...task, description: e.target.value})}
+                            onChange={e => setEvent({...event, description: e.target.value})}
                         />
                         <Form.Control
                             className={'mb-2'}
@@ -76,8 +83,8 @@ const TaskModal = ({head, show, onHide}) => {
                         )}
                         <Form.Control
                             type='date'
-                            value={task.date}
-                            onChange={e => setTask({...task, date: e.target.value})}
+                            value={task.start}
+                            onChange={e => setEvent({...event, start: e.target.value})}
                         />
                     </Form>
                 </Modal.Body>
@@ -89,6 +96,6 @@ const TaskModal = ({head, show, onHide}) => {
             </Modal>
         </div>
     );
-};
+});
 
 export default TaskModal;

@@ -7,88 +7,75 @@ export default class TaskStore {
         this._tasks = [
             {
                 id: 1,
-                title: "Backlog",
-                tasks: [
-                    {
-                        id: 1,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: img1
-                    },
-                    {
-                        id: 2,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                ]
+                status: 'Backlog',
+                type: 'Design',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: img1
             },
             {
                 id: 2,
-                title: "To Do", tasks: [
-                    {
-                        id: 1,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                    {
-                        id: 2,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                ]
+                status: 'Backlog',
+                type: 'Research',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
             },
             {
                 id: 3,
-                title: "In Progress", tasks: [
-                    {
-                        id: 1,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                    {
-                        id: 2,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                ]
+                status: 'To Do',
+                type: 'Planning',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
             },
             {
                 id: 4,
-                title: "Review", tasks: [
-                    {
-                        id: 1,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                    {
-                        id: 2,
-                        type: 'Design',
-                        title: "Create styleguide foundation",
-                        description: 'Create content for landing App',
-                        date: '2023-10-20',
-                        img: ''
-                    },
-                ]
+                status: 'To Do',
+                type: 'Design',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
+            },
+            {
+                id: 5,
+                status: 'In Progress',
+                type: 'Content',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
+            },
+            {
+                id: 6,
+                status: 'In Progress',
+                type: 'Research',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
+            },
+            {
+                id: 7,
+                status: 'Review',
+                type: 'Planning',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
+            },
+            {
+                id: 8,
+                status: 'Review',
+                type: 'Content',
+                title: "Create styleguide foundation",
+                description: 'Create content for landing App',
+                start: '2023-10-20',
+                img: ''
             },
         ]
         makeAutoObservable(this);

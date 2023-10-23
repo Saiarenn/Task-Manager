@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     overflow: hidden;
+    background: #D2D3F8;
 }
 
 .fc-event-main {
@@ -46,6 +47,7 @@
 
 .event-text {
     margin: 0 0 0 15px;
+    width: 10%;
 }
 
 .progress-percent {
@@ -67,5 +69,21 @@
     width: 48%;
     height: 100%;
     border-radius: 0 45px 45px 0;
+    background: #000;
 }
 
+.Design {
+    background: var(--mainBlue);
+}
+
+.Research {
+    background: var(--research);
+}
+
+.Content {
+    background: var(--content);
+}
+
+.Planning {
+    background: var(--planning);
+}
