@@ -1,6 +1,7 @@
-import {CALENDAR_ROUTE, TASKS_ROUTE} from "./components/utils/consts";
+import {CALENDAR_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE} from "./utils/consts";
 import Calendar from "./pages/Calendar";
 import Tasks from "./pages/Tasks";
+import Auth from "./pages/Auth";
 
 export const publicRoutes = [
     {
@@ -10,5 +11,13 @@ export const publicRoutes = [
     {
         path: TASKS_ROUTE,
         component: Tasks,
+    },
+    {
+        path: LOGIN_ROUTE,
+        component: Auth
+    },
+    {
+        path: REGISTRATION_ROUTE,
+        component: Auth
     },
 ]

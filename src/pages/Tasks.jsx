@@ -1,101 +1,29 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import '../style/Tasks.css'
 import img1 from '../assets/taskimg1.png';
 import '../fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf'
 import TaskModal from "../components/modals/TaskModal";
+import {observer} from "mobx-react-lite";
+import {Context} from "../index";
 
 
-const Tasks = () => {
+const Tasks = observer(() => {
+    const {task} = useContext(Context)
     const [heads, setHeads] = useState([
-        {
-            id: 1,
-            title: "Backlog",
-            tasks: [
-                {
-                    id: 1,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: img1
-                },
-                {
-                    id: 2,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-            ]
-        },
-        {
-            id: 2,
-            title: "To Do", tasks: [
-                {
-                    id: 1,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-                {
-                    id: 2,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-            ]
-        },
-        {
-            id: 3,
-            title: "In Progress", tasks: [
-                {
-                    id: 1,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-                {
-                    id: 2,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-            ]
-        },
-        {
-            id: 4,
-            title: "Review", tasks: [
-                {
-                    id: 1,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-                {
-                    id: 2,
-                    type: 'Design',
-                    title: "Create styleguide foundation",
-                    description: 'Create content for landing App',
-                    date: '2023-10-20',
-                    img: ''
-                },
-            ]
-        },
+        {title: "Backlog", tasks: []},
+        {title: "To Do", tasks: []},
+        {title: "In Progress", tasks: []},
+        {title: "Review", tasks: []},
     ])
-
     const [visible, setVisible] = useState(false);
     const [showModal, setShowModal] = useState('');
+
+    // const addTaskToColumn = (columnId, newTask) => {
+    //     const targetColumn = heads.find(column => column.id === columnId);
+    //
+    //     targetColumn.tasks.push(newTask);
+    // };
+
 
     const openModal = (title) => {
         setVisible(true)
@@ -122,7 +50,7 @@ const Tasks = () => {
             <h1>Task</h1>
 
             <div className={'task-wrapper'}>
-                {heads.map((head) => (
+                {task.tasks.map((head) => (
                     <div className={'task-column'} key={head.title}>
                         <div className={'task-header'}>
 
@@ -156,12 +84,10 @@ const Tasks = () => {
                                     {task.type}
                                 </div>
                                 {
-                                    task.img ?
+                                    task.img &&
                                         <div className={'task-item-img'}>
                                             <img src={task.img} alt={''}/>
                                         </div>
-                                        :
-                                        ''
                                 }
 
                                 <div className={'task-item-title'}>
@@ -182,6 +108,6 @@ const Tasks = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Tasks;

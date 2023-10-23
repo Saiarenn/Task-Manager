@@ -22,8 +22,6 @@ const TaskModal = ({head, show, onHide}) => {
                 setTask({...task, img: reader.result});
             };
             reader.readAsDataURL(file);
-            console.log(reader.result)
-
         } else {
             setErrorMessage('File Size Exceeds 2mb');
         }
@@ -47,7 +45,6 @@ const TaskModal = ({head, show, onHide}) => {
                 <Modal.Body>
                     <Form>
                         <Form.Select className={'mb-2'} aria-label="Default select example"
-                                     defaultValue={'Design'}
                                      value={task.type}
                                      onChange={e => setTask({...task, type: e.target.value})}
                         >

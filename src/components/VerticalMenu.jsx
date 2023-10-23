@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style/VerticalMenu.css'
-import {CALENDAR_ROUTE, TASKS_ROUTE} from "./utils/consts";
+import {CALENDAR_ROUTE, TASKS_ROUTE} from "../utils/consts";
 import {useLocation, useNavigate} from "react-router-dom";
 
 const VerticalMenu = () => {
@@ -63,12 +63,15 @@ const VerticalMenu = () => {
 
     return (
         <div className="vertical-menu">
-            {menuItems.map((menuItem, index) => (
-                <a key={index} className={location.pathname === menuItem.link ? "active" : ''}
-                   onClick={() => navigate(menuItem.link)}>
-                    {menuItem.name}
-                </a>
-            ))}
+            <div className={'vertical-menu-logo'}>Logo</div>
+            <div className={'vertical-menu-items'}>
+                {menuItems.map((menuItem, index) => (
+                    <a key={index} className={location.pathname === menuItem.link ? "active" : ''}
+                       onClick={() => navigate(menuItem.link)}>
+                        {menuItem.name}
+                    </a>
+                ))}
+            </div>
         </div>
     );
 };
