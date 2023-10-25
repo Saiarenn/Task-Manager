@@ -4,20 +4,64 @@ import {Button, Form} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 
-const TaskModal = observer(({head, show, onHide, add}) => {
+const TaskModal = observer(({head, show, onHide}) => {
     const {task} = useContext(Context);
-    const [event, setEvent] = useState({
-        status: head.title, type: 'Design', title: '', description: '', start: Date.now(), img: ''
+    const [points, setPoints] = useState([])
+    const addPoint = () => {
+        setPoints([...points, {pointDescription: '', number: Date.now()}])
+    }
+
+    const removePoint = (number) => {
+        setPoints(points.filter(point => point.number !== number))
+    }
+
+    const changePoint = (key, value, number) => {
+        setPoints(points.map(point => point.number === number ? {...point, [key]: value} : point))
+    }
+
+    const getStatusInt = (status) => {
+        switch (status) {
+            case "Backlog":
+                return "1";
+            case "To Do":
+                return "2";
+            case "In Progress":
+                return "3";
+            case "Review":
+                return "4";
+        }
+    }
+
+    const [info, setInfo] = useState({
+        status: getStatusInt(head.title),
+        type: 1, taskTitle: '',
+        taskDescription: '', start: Date.now(),
+        img: '', points: [],
     })
+
     const [errorMessage, setErrorMessage] = useState('');
 
+    
     const addTask = () => {
-        setEvent({...event, id: Date.now()});
-        head.tasks.push(event);
-        task.tasks.push(event);
+        const newTask = {id: Date.now(), taskInfo: { ...info,  points: points }};
+
+        const updatedTasks = [...task.tasks, newTask];
+
+        head.tasks.push(newTask);
+        task.setTasks(updatedTasks);
+
         onHide();
-        setEvent({...event, type: 'Design', title: '', description: '', start: Date.now(), img: ''})
-    }
+        setPoints([]);
+        setInfo({
+            status: getStatusInt(head.title),
+            type: '1',
+            taskTitle: '',
+            taskDescription: '',
+            start: Date.now(),
+            img: '',
+            points: [],
+        });
+    };
 
     const fileChange = (e) => {
         const file = e.target.files[0];
@@ -26,7 +70,7 @@ const TaskModal = observer(({head, show, onHide, add}) => {
         if (file.size < 2 * 1024 * 1024) {
             const reader = new FileReader();
             reader.onload = () => {
-                setEvent({...event, img: reader.result});
+                setInfo({...info, img: reader.result});
             };
             reader.readAsDataURL(file);
         } else {
@@ -52,26 +96,26 @@ const TaskModal = observer(({head, show, onHide, add}) => {
                 <Modal.Body>
                     <Form>
                         <Form.Select className={'mb-2'} aria-label="Default select example"
-                                     value={task.type}
-                                     onChange={e => setEvent({...event, type: e.target.value})}
+                                     value={info.type}
+                                     onChange={e => setInfo({...info, type: parseInt(e.target.value)})}
                         >
-                            <option value="Design">Design</option>
-                            <option value="Research">Research</option>
-                            <option value="Content">Content</option>
-                            <option value="Planning">Planning</option>
+                            <option value="1">Design</option>
+                            <option value="2">Research</option>
+                            <option value="3">Content</option>
+                            <option value="4">Planning</option>
                         </Form.Select>
                         <Form.Control
                             className={'mb-2'}
                             placeholder={"Enter the Title"}
-                            value={task.title}
-                            onChange={e => setEvent({...event, title: e.target.value})}
+                            value={info.taskTitle}
+                            onChange={e => setInfo({...info, taskTitle: e.target.value})}
                         />
                         <Form.Control
                             className={'mb-2'}
                             as="textarea"
                             placeholder={"Enter the Description"}
-                            value={task.description}
-                            onChange={e => setEvent({...event, description: e.target.value})}
+                            value={info.description}
+                            onChange={e => setInfo({...info, taskDescription: e.target.value})}
                         />
                         <Form.Control
                             className={'mb-2'}
@@ -83,10 +127,33 @@ const TaskModal = observer(({head, show, onHide, add}) => {
                         )}
                         <Form.Control
                             type='date'
-                            value={task.start}
-                            onChange={e => setEvent({...event, start: e.target.value})}
+                            value={info.start}
+                            onChange={e => setInfo({...info, start: e.target.value})}
                         />
+                        <Button
+                            variant={"outline-dark"}
+                            className="mt-3"
+                            onClick={addPoint}
+                        >
+                            Add new Point
+                        </Button>
+                        {points.map(point =>
+                            <div style={{display: 'flex'}} key={point.id} className="mt-3">
+                                <Form.Control
+                                    className={'me-3'}
+                                    value={point.pointDescription}
+                                    onChange={e => changePoint('pointDescription', e.target.value, point.number)}
+                                    placeholder={"Description of the Point"}
+                                />
+                                <Button
+                                    onClick={() => removePoint(point.number)}
+                                    variant={"outline-danger"}>
+                                    Delete
+                                </Button>
+                            </div>
+                        )}
                     </Form>
+
                 </Modal.Body>
 
                 <Modal.Footer>

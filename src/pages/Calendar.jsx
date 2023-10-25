@@ -9,11 +9,25 @@ import {Context} from "../index";
 
 const Calendar = observer(() => {
     const {task} = useContext(Context)
+
+    const getTypeString = (type) => {
+        switch (type) {
+            case "1":
+                return "Design";
+            case "2":
+                return "Research";
+            case "3":
+                return "Content";
+            case "4":
+                return "Planning";
+        }
+    }
+
     const eventContent = (eventInfo) => {
         const foundItem = task.tasks.find(item => item.title === eventInfo.event.title);
         return (
             <div className={'event-content'}>
-                <div className={`progress-bar ${foundItem.type}`}></div>
+                <div className={`progress-bar ${getTypeString(foundItem.type)}`}></div>
                 <div className={'event-text'}>{eventInfo.event.title}</div>
                 <div>
                     <div className={'progress-percent'}>
