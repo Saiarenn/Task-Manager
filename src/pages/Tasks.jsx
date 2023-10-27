@@ -9,6 +9,8 @@ import {fetchTasks} from "../http/TaskAPI";
 
 const Tasks = observer(() => {
     const {task} = useContext(Context)
+    const [visible, setVisible] = useState(false);
+    const [showModal, setShowModal] = useState('');
 
     useEffect(() => {
         fetchTasks().then(data => {
@@ -44,9 +46,6 @@ const Tasks = observer(() => {
                 return "Planning";
         }
     }
-
-    const [visible, setVisible] = useState(false);
-    const [showModal, setShowModal] = useState('');
 
     const openModal = (title) => {
         setVisible(true)
@@ -116,7 +115,7 @@ const Tasks = observer(() => {
                                 }
 
                                 <div className={'task-item-title'}>
-                                    {task.taskInfo.taskTitle}
+                                    {task.taskInfo.title}
                                 </div>
 
                                 <div className={'task-item-description'}>

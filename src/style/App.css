@@ -26,6 +26,8 @@
 
 body {
     font-family: 'DM Sans', sans-serif;
+    background: #F3F4F8;
+    overflow-x: hidden;
 }
 
 button {

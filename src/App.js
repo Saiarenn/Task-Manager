@@ -7,7 +7,7 @@ import AppRouter from "./components/AppRouter";
 function App() {
     return (
         <BrowserRouter>
-            <div style={{display: "flex", background: "#F3F4F8"}}>
+            <div style={{display: "flex"}}>
                 <VerticalMenu/>
                 <div style={{width: '100px'}}></div>
                 <div style={{width: '100%'}}>

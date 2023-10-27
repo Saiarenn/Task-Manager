@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,28 +6,37 @@ import interactionPlugin from "@fullcalendar/interaction";
 import '../style/Calendar.css'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
+import {fetchTasks} from "../http/TaskAPI";
 
 const Calendar = observer(() => {
     const {task} = useContext(Context)
 
+    // useEffect(() => {
+    //     fetchTasks().then(data => {
+    //         task.setTasks(data);
+    //     })
+    // }, [task])
+
+    const taskInfoArray = task.tasks.map(task => task.taskInfo);
+
     const getTypeString = (type) => {
         switch (type) {
-            case "1":
+            case 1:
                 return "Design";
-            case "2":
+            case 2:
                 return "Research";
-            case "3":
+            case 3:
                 return "Content";
-            case "4":
+            case 4:
                 return "Planning";
         }
     }
 
     const eventContent = (eventInfo) => {
-        const foundItem = task.tasks.find(item => item.title === eventInfo.event.title);
+        const currentTask = taskInfoArray.find(taskInfo => taskInfo.title === eventInfo.event.title)
         return (
             <div className={'event-content'}>
-                <div className={`progress-bar ${getTypeString(foundItem.type)}`}></div>
+                <div className={`progress-bar ${getTypeString(taskInfoArray[0].type)}`}></div>
                 <div className={'event-text'}>{eventInfo.event.title}</div>
                 <div>
                     <div className={'progress-percent'}>
@@ -51,7 +60,7 @@ const Calendar = observer(() => {
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView={"dayGridWeek"}
-                events={task.tasks}
+                events={taskInfoArray}
                 eventContent={eventContent}
             />
         </div>
