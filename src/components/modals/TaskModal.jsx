@@ -46,7 +46,6 @@ const TaskModal = observer(({head, show, onHide}) => {
     const addTask = () => {
         const newTask =
              {...info, points: points};
-        head.tasks.push(newTask)
         createTask(newTask).then(data => {
             onHide();
             setPoints([]);

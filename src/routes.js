@@ -10,7 +10,6 @@ import Calendar from "./pages/Calendar";
 import Tasks from "./pages/Tasks";
 import Auth from "./pages/Auth";
 import Setting from "./pages/Setting";
-import Home from "./pages/Home";
 
 export const publicRoutes = [
     {
@@ -24,10 +23,10 @@ export const publicRoutes = [
 ]
 
 export const authRoutes = [
-    {
-        path: DASHBOARD_ROUTE,
-        component: Home,
-    },
+    // {
+    //     path: DASHBOARD_ROUTE,
+    //     component: Home,
+    // },
     {
         path: CALENDAR_ROUTE,
         component: Calendar,

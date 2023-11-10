@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -11,36 +11,51 @@ import {fetchTasks} from "../http/TaskAPI";
 const Calendar = observer(() => {
     const {task} = useContext(Context)
 
-    // useEffect(() => {
-    //     fetchTasks().then(data => {
-    //         task.setTasks(data);
-    //     })
-    // }, [task])
+    const [taskArr, setTaskArray] = useState([])
+
+    useEffect(() => {
+        fetchTasks().then(data => {
+            task.setTasks(data);
+        })
+        setTaskArray(destructureTasks(task.tasks))
+    }, [task.tasks])
+
+    function destructureTasks(task) {
+        if (Array.isArray(task)) {
+            return task.map((item) => {
+                const { taskInfo, ...parentData } = item;
+                return { ...parentData, ...taskInfo };
+            });
+        }
+        return task;
+    }
 
     const taskInfoArray = task.tasks.map(task => task.taskInfo);
 
-    const getTypeString = (type) => {
-        switch (type) {
-            case 1:
-                return "Design";
-            case 2:
-                return "Research";
-            case 3:
-                return "Content";
-            case 4:
-                return "Planning";
-        }
+    const getTypeString = {
+        1: "Design",
+        2: "Research",
+        3: "Content",
+        4: "Planning",
+    };
+    const completedPointsCount = (task) => task.points.filter(step => step.completed).length;
+
+    const getPercentage = (task) => {
+        return task.points.length === 0 ? '100%' : Math.round(completedPointsCount(task) / task.points.length * 100) + '%';
     }
 
     const eventContent = (eventInfo) => {
-        const currentTask = taskInfoArray.find(taskInfo => taskInfo.title === eventInfo.event.title)
+        const currentTask = taskArr.find(task => task.id == eventInfo.event.id)
+        const percentage = getPercentage(currentTask)
+        const type = getTypeString[currentTask.type]
+        console.log(taskArr)
         return (
-            <div className={'event-content'}>
-                <div className={`progress-bar ${getTypeString(taskInfoArray[0].type)}`}></div>
+            <div className={`event-content ${type}`}>
+                <div className={`progress-bar ${type}`} style={{width: percentage}}></div>
                 <div className={'event-text'}>{eventInfo.event.title}</div>
                 <div>
                     <div className={'progress-percent'}>
-                        48%
+                        {percentage}
                     </div>
                 </div>
             </div>
@@ -60,7 +75,7 @@ const Calendar = observer(() => {
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView={"dayGridWeek"}
-                events={taskInfoArray}
+                events={taskArr}
                 eventContent={eventContent}
             />
         </div>

@@ -16,7 +16,7 @@ const Tasks = observer(() => {
         fetchTasks().then(data => {
             task.setTasks(data);
         })
-    }, [])
+    }, [task.tasks])
 
     const tasksByStatus = task.tasks.reduce((accumulator, task) => {
         const { status } = task.taskInfo;
@@ -34,18 +34,12 @@ const Tasks = observer(() => {
         {title: "Review", tasks: tasksByStatus['4'] || []},
     ])
 
-    const getTypeString = (type) => {
-        switch (type) {
-            case 1:
-                return "Design";
-            case 2:
-                return "Research";
-            case 3:
-                return "Content";
-            case 4:
-                return "Planning";
-        }
-    }
+    const getTypeString = {
+        1: "Design",
+        2: "Research",
+        3: "Content",
+        4: "Planning",
+    };
 
     const openModal = (title) => {
         setVisible(true)
@@ -104,8 +98,8 @@ const Tasks = observer(() => {
 
                         {head.tasks.map(task => (
                             <div className={'task-item'} key={task.id}>
-                                <div className={`task-item-type  ${getTypeString(task.taskInfo.type)}`}>
-                                    {getTypeString(task.taskInfo.type)}
+                                <div className={`task-item-type  ${getTypeString[task.taskInfo.type]}`}>
+                                    {getTypeString[task.taskInfo.type]}
                                 </div>
                                 {
                                     task.taskInfo.img &&
