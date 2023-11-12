@@ -5,9 +5,10 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "..";
 import { login, registration } from "../http/UserAPI";
 import {CALENDAR_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {fetchTasks} from "../http/TaskAPI";
 
 const Auth = observer(() => {
-    const { user } = useContext(Context)
+    const { user, task } = useContext(Context)
     const location = useLocation()
     const navigate = useNavigate()
     const isLogin = location.pathname === LOGIN_ROUTE
@@ -17,21 +18,19 @@ const Auth = observer(() => {
     const [surname, setSurname] = useState('')
 
     const click = async () => {
-        // try {
-        //     let data;
-        //     if (isLogin) {
-        //         data = await login(email, password)
-        //     } else {
-        //         data = await registration(name, surname, email, password)
-        //     }
-        //     user.setUser(data)
-        //     user.setIsAuth(true)
-        //     navigate(CALENDAR_ROUTE)
-        // } catch (e) {
-        //     alert(e)
-        // }
-        user.setIsAuth(true)
-        navigate(CALENDAR_ROUTE)
+        try {
+            let data;
+            if (isLogin) {
+                data = await login(email, password)
+            } else {
+                data = await registration(name, surname, email, password)
+            }
+            user.setUser(data)
+            user.setIsAuth(true)
+            navigate(CALENDAR_ROUTE)
+        } catch (e) {
+            alert(e)
+        }
     }
 
     return (

@@ -67,24 +67,39 @@
 .progress-bar {
     z-index: -1;
     position: absolute;
-    width: 48%;
     height: 100%;
     border-radius: 0 45px 45px 0;
     background: #000;
 }
 
-.Design {
+.progress-bar.Design {
     background: var(--mainBlue);
 }
 
-.Research {
+.progress-bar.Research {
     background: var(--research);
 }
 
-.Content {
+.progress-bar.Content {
     background: var(--content);
 }
 
-.Planning {
+.progress-bar.Planning {
     background: var(--planning);
+}
+
+.event-content.Design {
+    background: #D2D3F8;
+}
+
+.event-content.Research {
+    background: #D4EEFF;
+}
+
+.event-content.Content {
+    background: #C4EDE1;
+}
+
+.event-content.Planning {
+    background: #FFF2EA;
 }

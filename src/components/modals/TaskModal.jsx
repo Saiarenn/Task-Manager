@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import {Button, Form} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {createTask} from "../../http/TaskAPI";
+import {createTask, fetchTasks} from "../../http/TaskAPI";
 
 const TaskModal = observer(({head, show, onHide}) => {
     const {task} = useContext(Context);
@@ -20,23 +20,25 @@ const TaskModal = observer(({head, show, onHide}) => {
         setPoints(points.map(point => point.number === number ? {...point, [key]: value} : point))
     }
 
-    const getStatusInt = (status) => {
-        switch (status) {
-            case "Backlog":
-                return 1;
-            case "To Do":
-                return 2;
-            case "In Progress":
-                return 3;
-            case "Review":
-                return 4;
-        }
+    const getStatusInt = {
+        "Backlog": 1,
+        "To Do": 2,
+        "In Progress": 3,
+        "Review": 4,
     }
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`
+    };
+
     const [info, setInfo] = useState({
-        status: getStatusInt(head.title),
+        status: getStatusInt[head.title],
         type: 1, title: '',
-        taskDescription: '', start: Date.now(),
+        taskDescription: '', start: formatDate(new Date(Date.now())),
         img: '', points: [],
     })
 
@@ -46,20 +48,21 @@ const TaskModal = observer(({head, show, onHide}) => {
     const addTask = () => {
         const newTask =
              {...info, points: points};
-        head.tasks.push(newTask)
         createTask(newTask).then(data => {
             onHide();
             setPoints([]);
             setInfo({
-                status: getStatusInt(head.title),
-                type: 1,
-                title: '',
+                status: getStatusInt[head.title],
+                type: 1, title: '',
                 taskDescription: '',
-                start: Date.now(),
-                img: '',
-                points: [],
+                start: formatDate(new Date(Date.now())),
+                img: '', points: [],
             });
+            fetchTasks().then(data =>
+                task.setTasks(data)
+            )
         })
+
     };
 
     const fileChange = (e) => {
