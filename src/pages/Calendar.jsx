@@ -14,11 +14,11 @@ const Calendar = observer(() => {
     const [taskArr, setTaskArray] = useState([])
 
     useEffect(() => {
-        fetchTasks().then(data => {
-            task.setTasks(data);
-        })
+        // fetchTasks().then(data => {
+        //     task.setTasks(data);
+        // })
         setTaskArray(destructureTasks(task.tasks))
-    }, [])
+    }, [task.tasks])
 
     function destructureTasks(task) {
         if (Array.isArray(task)) {

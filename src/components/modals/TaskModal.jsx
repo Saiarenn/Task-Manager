@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import {Button, Form} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
-import {createTask} from "../../http/TaskAPI";
+import {createTask, fetchTasks} from "../../http/TaskAPI";
 
 const TaskModal = observer(({head, show, onHide}) => {
     const {task} = useContext(Context);
@@ -56,10 +56,13 @@ const TaskModal = observer(({head, show, onHide}) => {
                 type: 1, title: '',
                 taskDescription: '',
                 start: formatDate(new Date(Date.now())),
-                img: '',
-                points: [],
+                img: '', points: [],
             });
+            fetchTasks().then(data =>
+                task.setTasks(data)
+            )
         })
+
     };
 
     const fileChange = (e) => {
