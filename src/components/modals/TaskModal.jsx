@@ -20,23 +20,25 @@ const TaskModal = observer(({head, show, onHide}) => {
         setPoints(points.map(point => point.number === number ? {...point, [key]: value} : point))
     }
 
-    const getStatusInt = (status) => {
-        switch (status) {
-            case "Backlog":
-                return 1;
-            case "To Do":
-                return 2;
-            case "In Progress":
-                return 3;
-            case "Review":
-                return 4;
-        }
+    const getStatusInt = {
+        "Backlog": 1,
+        "To Do": 2,
+        "In Progress": 3,
+        "Review": 4,
     }
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+
+        return `${year}-${month}-${day}`
+    };
+
     const [info, setInfo] = useState({
-        status: getStatusInt(head.title),
+        status: getStatusInt[head.title],
         type: 1, title: '',
-        taskDescription: '', start: Date.now(),
+        taskDescription: '', start: formatDate(new Date(Date.now())),
         img: '', points: [],
     })
 
@@ -50,11 +52,10 @@ const TaskModal = observer(({head, show, onHide}) => {
             onHide();
             setPoints([]);
             setInfo({
-                status: getStatusInt(head.title),
-                type: 1,
-                title: '',
+                status: getStatusInt[head.title],
+                type: 1, title: '',
                 taskDescription: '',
-                start: Date.now(),
+                start: formatDate(new Date(Date.now())),
                 img: '',
                 points: [],
             });

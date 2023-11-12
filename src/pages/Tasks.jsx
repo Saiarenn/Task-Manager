@@ -16,7 +16,7 @@ const Tasks = observer(() => {
         fetchTasks().then(data => {
             task.setTasks(data);
         })
-    }, [task.tasks])
+    }, [])
 
     const tasksByStatus = task.tasks.reduce((accumulator, task) => {
         const { status } = task.taskInfo;

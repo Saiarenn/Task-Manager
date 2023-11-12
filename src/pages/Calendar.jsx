@@ -18,7 +18,7 @@ const Calendar = observer(() => {
             task.setTasks(data);
         })
         setTaskArray(destructureTasks(task.tasks))
-    }, [task.tasks])
+    }, [])
 
     function destructureTasks(task) {
         if (Array.isArray(task)) {
@@ -29,8 +29,6 @@ const Calendar = observer(() => {
         }
         return task;
     }
-
-    const taskInfoArray = task.tasks.map(task => task.taskInfo);
 
     const getTypeString = {
         1: "Design",
@@ -48,7 +46,6 @@ const Calendar = observer(() => {
         const currentTask = taskArr.find(task => task.id == eventInfo.event.id)
         const percentage = getPercentage(currentTask)
         const type = getTypeString[currentTask.type]
-        console.log(taskArr)
         return (
             <div className={`event-content ${type}`}>
                 <div className={`progress-bar ${type}`} style={{width: percentage}}></div>
