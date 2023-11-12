@@ -25,9 +25,6 @@ const Auth = observer(() => {
             } else {
                 data = await registration(name, surname, email, password)
             }
-            fetchTasks().then(data =>
-                task.setTasks(data)
-            )
             user.setUser(data)
             user.setIsAuth(true)
             navigate(CALENDAR_ROUTE)
