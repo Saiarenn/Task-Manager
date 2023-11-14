@@ -5,6 +5,11 @@ export const createTask = async (task) => {
     return data
 }
 
+export const updateTask = async (task) => {
+    const { data } = await $authHost.put('api/v1/task', task)
+    return data
+}
+
 export const fetchTasks = async () => {
     const { data } = await $authHost.get('api/v1/task')
     return data

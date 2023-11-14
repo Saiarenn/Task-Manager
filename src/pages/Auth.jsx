@@ -4,7 +4,7 @@ import { Button, Card, Container, Form } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "..";
 import { login, registration } from "../http/UserAPI";
-import {CALENDAR_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {CALENDAR_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SEND_ROUTE} from "../utils/consts";
 import {fetchTasks} from "../http/TaskAPI";
 
 const Auth = observer(() => {
@@ -22,12 +22,17 @@ const Auth = observer(() => {
             let data;
             if (isLogin) {
                 data = await login(email, password)
+                user.setUser(data)
+                user.setIsAuth(true)
+                navigate(CALENDAR_ROUTE)
+                fetchTasks().then(data => {
+                    task.setTasks(data)
+                })
             } else {
                 data = await registration(name, surname, email, password)
+                navigate(SEND_ROUTE)
             }
-            user.setUser(data)
-            user.setIsAuth(true)
-            navigate(CALENDAR_ROUTE)
+
         } catch (e) {
             alert(e)
         }

@@ -44,6 +44,11 @@
     margin: 15px 0;
     border-radius: 10px;
     padding: 20px;
+    cursor: grab;
+}
+
+.task-item:focus {
+    cursor: grabbing;
 }
 
 .task-item-type {

@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {$host} from "../http";
+import '../style/EmailConfirmation.css'
+import {CALENDAR_ROUTE} from "../utils/consts";
 
 const EmailConfirmation = () => {
+    const navigate = useNavigate()
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const [confirmationStatus, setConfirmationStatus] = useState('pending');
@@ -20,10 +23,11 @@ const EmailConfirmation = () => {
     }, [token]);
 
     return (
-        <div>
-            {confirmationStatus === 'pending' && <p>Confirming email...</p>}
-            {confirmationStatus === 'success' && <p>Email confirmed successfully!</p>}
-            {confirmationStatus === 'error' && <p>Error confirming email. Please try again later.</p>}
+        <div className="confirm-con">
+            <h1><i className="fa fa-check-circle" aria-hidden="true"></i> Email is verified</h1>
+            <p>Your email is verified for <a href="#">@someusername</a>.</p>
+            <p>Redirecting you to app.</p>
+            <button className="confirm-button" onClick={() => navigate(CALENDAR_ROUTE)}>Go to app now</button>
         </div>
     );
 };

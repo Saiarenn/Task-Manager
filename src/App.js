@@ -14,12 +14,16 @@ function App() {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        fetchTasks().then(data => {
-            task.setTasks(data);
-        })
         if (token) {
-            user.setUser(jwt_decode(token))
-            user.setIsAuth(true)
+            try {
+                user.setUser(jwt_decode(token))
+                fetchTasks().then(data => {
+                    task.setTasks(data);
+                    user.setIsAuth(true)
+                })
+            } catch (e) {
+                alert(e)
+            }
         }
     }, [token]);
 
