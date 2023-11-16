@@ -9,6 +9,11 @@ const Navbar = observer(() => {
     const {user} = useContext(Context);
     const navigate = useNavigate();
 
+    const logout = () => {
+        user.setIsAuth(false)
+        localStorage.removeItem('token')
+    }
+
     return (
         <nav>
             <div className={"search__wrapper"}>
@@ -23,7 +28,11 @@ const Navbar = observer(() => {
                 </button>
             </div>
 
-            {!user.isAuth &&
+            {user.isAuth ?
+                <div className={"navlinks"}>
+                    <button className={'loginButton'} onClick={logout}>Logout</button>
+                </div>
+                :
                 <div className={"navlinks"}>
                     <button className={'loginButton'} onClick={() => navigate(LOGIN_ROUTE)}>Login</button>
                 </div>

@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {fetchTaskById} from "../http/TaskAPI";
+import {changeStatePoint, fetchTaskById} from "../http/TaskAPI";
 import {useParams} from "react-router-dom";
+import '../style/TaskPage.css'
+import PointsList from "../components/PointsList";
+import {Col, Row} from "react-bootstrap";
 
 const TaskPage = () => {
-    const [task, setTask] = useState({taskInfo: {points: []}})
+    const [task, setTask] = useState(null)
     const [loading, setLoading] = useState(true);
     const {id} = useParams()
 
     useEffect(() => {
-        fetchTaskById(id).then(data => setTask(data))
-        setLoading(false)
+        fetchTaskById(id).then(data => {
+            setTask(data)
+            setLoading(false)
+        })
     }, [])
 
     const getTypeString = {
@@ -31,28 +36,26 @@ const TaskPage = () => {
             {loading ?
                 <p>Loading...</p>
                 :
-                <div>
-                    <h1>Task Details</h1>
-                    <p>ID: {task.id}</p>
-                    <p>Status: {getStatusString[task.taskInfo.status]}</p>
-                    <p>Type: {getTypeString[task.taskInfo.type]}</p>
-                    <p>Title: {task.taskInfo.title}</p>
-                    <p>Task Description: {task.taskInfo.taskDescription}</p>
-                    <p>Start Date: {task.taskInfo.start}</p>
-                    <p>End Date: {task.taskInfo.end}</p>
-                    {
-                        task.taskInfo.img &&
-                        <img src={task.taskInfo.img} alt="Task Image"/>
-                    }
-                    <h2>Points:</h2>
-                    <ul>
-                        {task.taskInfo.points.length !== 0 && task.taskInfo.points.map((point) => (
-                            <li key={point.id}>
-                                {point.pointDescription} - Completed: {point.completed ? 'Yes' : 'No'}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <Row>
+                    <Col>
+                        <h1>Task Details</h1>
+                        <p>ID: {task.id}</p>
+                        <p>Status: {getStatusString[task.taskInfo.status]}</p>
+                        <p>Type: {getTypeString[task.taskInfo.type]}</p>
+                        <p>Title: {task.taskInfo.title}</p>
+                        <p>Task Description: {task.taskInfo.taskDescription}</p>
+                        <p>Start Date: {task.taskInfo.start}</p>
+                        <p>End Date: {task.taskInfo.end}</p>
+                        {
+                            task.taskInfo.img &&
+                            <img src={task.taskInfo.img} alt="Task Image"/>
+                        }
+                    </Col>
+                    <Col>
+                        <h1>Points:</h1>
+                        <PointsList task={task} setTask={setTask}/>
+                    </Col>
+                </Row>
             }
         </div>
     );

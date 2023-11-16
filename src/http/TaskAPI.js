@@ -29,3 +29,13 @@ export const deleteTaskPointById = async (taskId, pointId) => {
     const { data } = await $authHost.delete('api/v1/task/' + taskId + '/' + pointId)
     return data
 }
+
+export const addTaskPoint = async (taskId, pointDescription) => {
+    const { data } = await $authHost.post('api/v1/task/' + taskId, pointDescription)
+    return data
+}
+
+export const changeStatePoint = async (taskId, pointId, state) => {
+    const { data } = await $authHost.put(`api/v1/task/${taskId}/${pointId}?completed=${state}`);
+    return data;
+}
