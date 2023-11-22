@@ -22,7 +22,6 @@ const Auth = observer(() => {
             let data;
             if (isLogin) {
                 data = await login(email, password)
-                user.setUser(data)
                 user.setIsAuth(true)
                 navigate(CALENDAR_ROUTE)
                 fetchTasks().then(data => {
@@ -32,7 +31,7 @@ const Auth = observer(() => {
                 data = await registration(name, surname, email, password)
                 navigate(SEND_ROUTE)
             }
-
+            user.setUser(data)
         } catch (e) {
             alert(e)
         }

@@ -1,9 +1,13 @@
 .task-wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     margin: 30px 0 0 0;
     gap: 15px;
     color: var(--blue);
+}
+
+.task-column {
+    user-select: none;
 }
 
 .task-header {
@@ -11,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     border: none;
-    background: #fff;
+    background: var(--item);
     border-radius: 10px;
     padding: 10px 25px;
     font-size: 20px;
@@ -24,30 +28,35 @@
     align-items: center;
     border-radius: 5px;
     border: none;
-    background: #E8EAFF;
+    background: var(--addBg);
     padding: 7px;
     transition: all 0.3s ease;
 }
 
 .task-add:hover {
-    background: var(--mainBlue);
+    background: var(--plusBg);
 }
 
+.task-add svg rect {
+    fill: var(--plusBg);
+}
+
+
 .task-add:hover svg rect {
-    fill: white;
+    fill: var(--addBg);
 }
 
 .task-item {
     display: grid;
     gap: 15px;
-    background: white;
+    background: var(--item);
     margin: 15px 0;
     border-radius: 10px;
     padding: 20px;
     cursor: grab;
 }
 
-.task-item:focus {
+.task-item:active {
     cursor: grabbing;
 }
 

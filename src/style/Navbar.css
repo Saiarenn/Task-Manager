@@ -56,6 +56,6 @@ nav {
     color: white;
     border: none;
     border-radius: 41px;
-    background: var(--logbtn);
+    background: var(--mainBlue);
     cursor: pointer;
 }

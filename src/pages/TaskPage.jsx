@@ -32,12 +32,12 @@ const TaskPage = () => {
     };
 
     return (
-        <div className={'d-flex justify-content-center'}>
+        <div className={'d-flex justify-content-center p-3'}>
             {loading ?
                 <p>Loading...</p>
                 :
                 <Row>
-                    <Col>
+                    <Col md={8}>
                         <h1>Task Details</h1>
                         <p>ID: {task.id}</p>
                         <p>Status: {getStatusString[task.taskInfo.status]}</p>
@@ -51,8 +51,7 @@ const TaskPage = () => {
                             <img src={task.taskInfo.img} alt="Task Image"/>
                         }
                     </Col>
-                    <Col>
-                        <h1>Points:</h1>
+                    <Col md={4}>
                         <PointsList task={task} setTask={setTask}/>
                     </Col>
                 </Row>

@@ -5,7 +5,7 @@ import TaskModal from "../components/modals/TaskModal";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import TaskItem from "../components/TaskItem";
-import {createTask, fetchTasks, updateTask} from "../http/TaskAPI";
+import {fetchTasks, updateTask} from "../http/TaskAPI";
 
 
 const Tasks = observer(() => {
@@ -98,8 +98,8 @@ const Tasks = observer(() => {
                             <button className={'task-add'} onClick={() => openModal(head.title)}>
                                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="4" width="2" height="10" fill="#6772FE"/>
-                                    <rect y="6" width="2" height="10" transform="rotate(-90 0 6)" fill="#6772FE"/>
+                                    <rect x="4" width="2" height="10"/>
+                                    <rect y="6" width="2" height="10" transform="rotate(-90 0 6)"/>
                                 </svg>
                             </button>
 

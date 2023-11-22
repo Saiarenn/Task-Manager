@@ -13,6 +13,7 @@ import Setting from "./pages/Setting";
 import TaskPage from "./pages/TaskPage";
 import EmailSend from "./pages/EmailSend";
 import EmailConfirmation from "./pages/EmailConfirmation";
+import Dashboard from "./pages/Dashboard";
 
 export const publicRoutes = [
     {
@@ -28,16 +29,16 @@ export const publicRoutes = [
         component: EmailSend,
     },
     {
-        path: CONFIRMATION_ROUTE,
+        path: CONFIRMATION_ROUTE + '/:token',
         component: EmailConfirmation,
     }
 ]
 
 export const authRoutes = [
-    // {
-    //     path: DASHBOARD_ROUTE,
-    //     component: Home,
-    // },
+    {
+        path: DASHBOARD_ROUTE,
+        component: Dashboard,
+    },
     {
         path: CALENDAR_ROUTE,
         component: Calendar,

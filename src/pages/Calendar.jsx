@@ -7,10 +7,12 @@ import '../style/Calendar.css'
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {fetchTasks} from "../http/TaskAPI";
+import {useNavigate} from "react-router-dom";
+import {TASKS_ROUTE} from "../utils/consts";
 
 const Calendar = observer(() => {
     const {task} = useContext(Context)
-
+    const navigate = useNavigate()
     const [taskArr, setTaskArray] = useState([])
 
     useEffect(() => {
@@ -20,8 +22,8 @@ const Calendar = observer(() => {
     function destructureTasks(task) {
         if (Array.isArray(task)) {
             return task.map((item) => {
-                const { taskInfo, ...parentData } = item;
-                return { ...parentData, ...taskInfo };
+                const {taskInfo, ...parentData} = item;
+                return {...parentData, ...taskInfo};
             });
         }
         return task;
@@ -44,7 +46,7 @@ const Calendar = observer(() => {
         const percentage = getPercentage(currentTask)
         const type = getTypeString[currentTask.type]
         return (
-            <div className={`event-content ${type}`}>
+            <div className={`event-content ${type}`} onClick={() => navigate(TASKS_ROUTE + '/' + currentTask.id)}>
                 <div className={`progress-bar ${type}`} style={{width: percentage}}></div>
                 <div className={'event-text'}>{eventInfo.event.title}</div>
                 <div>

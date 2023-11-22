@@ -86,23 +86,31 @@ const PointsList = ({task, setTask}) => {
                 </defs>
             </svg>
             <div className="todo-list">
-                <div>
-                    <button
-                        className={filter === 'all' ? 'active todo-button' : 'todo-button'}
-                        onClick={() => setFilter('all')}>
-                        All
-                    </button>
-                    <button
-                        className={filter === 'active' ? 'active todo-button' : 'todo-button'}
-                        onClick={() => setFilter('active')}>
-                        Active
-                    </button>
-                    <button
-                        className={filter === 'completed' ? 'active todo-button' : 'todo-button'}
-                        onClick={() => setFilter('completed')}>
-                        Completed
-                    </button>
+                <h3>Points</h3>
+
+                <div className={'todo-header'}>
+                    <span>
+                        {task.taskInfo.points.length + ' points'}
+                    </span>
+                    <div className={'todo-buttons'}>
+                        <button
+                            className={filter === 'all' ? 'active todo-button' : 'todo-button'}
+                            onClick={() => setFilter('all')}>
+                            All
+                        </button>
+                        <button
+                            className={filter === 'active' ? 'active todo-button' : 'todo-button'}
+                            onClick={() => setFilter('active')}>
+                            Active
+                        </button>
+                        <button
+                            className={filter === 'completed' ? 'active todo-button' : 'todo-button'}
+                            onClick={() => setFilter('completed')}>
+                            Completed
+                        </button>
+                    </div>
                 </div>
+
                 <form className="point__form" onSubmit={addPoint}>
                     <input className="point__input"
                            value={value}

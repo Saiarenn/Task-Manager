@@ -1,0 +1,52 @@
+.graph-wrapper {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px;
+    color: var(--blue);
+}
+
+.graph-title {
+    font-weight: 600;
+    margin: 0 0 30px;
+}
+
+.graph-tools {
+    display: flex;
+    gap: 30px;
+}
+
+.graph-btn {
+    background: transparent;
+    border: none;
+    color: var(--blue);
+    font-weight: 600;
+    transition: all .3s ease-in-out;
+}
+
+.graph-btn::after {
+    content: "";
+    height: 2px;
+    background: var(--lightBlue);
+    opacity: 0;
+    width: 0;
+    display: flex;
+    transition: all .4s ease-in-out;
+}
+
+.graph-btn:hover {
+    color: var(--lightBlue);
+}
+
+.graph-btn.active::after,
+.graph-btn:hover::after {
+    content: "";
+    height: 2px;
+    background: var(--lightBlue);
+    opacity: 1;
+    width: 100%;
+}
+
+.graph-btn.active {
+    color: var(--lightBlue);
+}

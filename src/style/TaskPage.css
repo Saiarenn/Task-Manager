@@ -2,6 +2,14 @@
     --duration: 0.8s;
 }
 
+.task-details {
+    max-width: 50%;
+}
+
+.task-points {
+    max-width: 50%;
+}
+
 .point__form {
     width: 100%;
     margin: 1rem 0 0 0;
@@ -34,15 +42,22 @@
     border-radius: 15px;
 }
 
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--desciption);
+}
+
 .todo-button {
     border: 0;
     padding: 3px 8px;
     background: 0;
-    font-size: 14px;
     line-height: 1;
     cursor: pointer;
-    color: var(--desciption);
     border-radius: 20px;
+    color: var(--desciption);
 }
 
 .todo-delete {

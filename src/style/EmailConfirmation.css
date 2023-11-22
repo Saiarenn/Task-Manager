@@ -1,7 +1,3 @@
-body {
-    color: #414141;
-}
-
 .confirm-con {
     display: flex;
     flex-direction: column;
@@ -11,6 +7,8 @@ body {
     height: 100%;
     font-weight: 300;
     padding: 30px;
+    color: #414141;
+
 }
 
 .confirm-button {

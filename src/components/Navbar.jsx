@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import "../style/Navbar.css"
 import {LOGIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
+import Cookies from 'js-cookie';
 
 const Navbar = observer(() => {
     const {user} = useContext(Context);
@@ -12,7 +13,44 @@ const Navbar = observer(() => {
     const logout = () => {
         user.setIsAuth(false)
         localStorage.removeItem('token')
+        Cookies.remove('refreshToken')
     }
+
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+    const toggleTheme = () => {
+        setIsDarkTheme((prevTheme) => !prevTheme);
+        updateThemeVariables(!isDarkTheme);
+    };
+
+    const root = document.documentElement;
+    root.style.setProperty('--desciption', '#768396');
+    root.style.setProperty('--research', '#2D72D9');
+    root.style.setProperty('--content', '#1AC6A5');
+    root.style.setProperty('--planning', '#F67D2D');
+    root.style.setProperty('--lightBlue', '#1EA7FF');
+    root.style.setProperty('--mainBlue', '#5051F9');
+
+    const updateThemeVariables = (isDarkTheme) => {
+        if (isDarkTheme) {
+            root.style.setProperty('--navbg', '#1E1F25');
+            root.style.setProperty('--blue', '#FAFAFA');
+            root.style.setProperty('--menubg', '#1E1F25');
+            root.style.setProperty('--mainBg', '#131517');
+            root.style.setProperty('--item', '#1E1F25');
+            root.style.setProperty('--addBg', '#5051F9');
+            root.style.setProperty('--plusBg', 'white');
+        } else { //light
+            root.style.setProperty('--navbg', 'white');
+            root.style.setProperty('--blue', '#23235F');
+            root.style.setProperty('--menubg', '#FBFAFF');
+            root.style.setProperty('--mainBg', '#F3F4F8');
+            root.style.setProperty('--item', 'white');
+            root.style.setProperty('--addBg', '#E8EAFF');
+            root.style.setProperty('--plusBg', '#6772FE');
+        }
+    };
+
 
     return (
         <nav>
@@ -27,7 +65,7 @@ const Navbar = observer(() => {
 
                 </button>
             </div>
-
+            <button onClick={toggleTheme}>Toggle Theme</button>
             {user.isAuth ?
                 <div className={"navlinks"}>
                     <button className={'loginButton'} onClick={logout}>Logout</button>
