@@ -1,5 +1,5 @@
 .graph-wrapper {
-    background: white;
+    background: var(--item);
     border-radius: 15px;
     padding: 30px;
     margin: 30px;
@@ -48,5 +48,30 @@
 }
 
 .graph-btn.active {
+    color: var(--lightBlue);
+}
+
+.custom-tooltip {
+    color: var(--blue);
+    background: var(--mainBg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tooltip-header {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.tooltip-body {
+    padding: 15px;
+}
+
+.tooltip-tasks {
+    color: var(--mainBlue);
+}
+
+.tooltip-expected {
     color: var(--lightBlue);
 }

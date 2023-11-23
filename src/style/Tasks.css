@@ -41,7 +41,6 @@
     fill: var(--plusBg);
 }
 
-
 .task-add:hover svg rect {
     fill: var(--addBg);
 }

@@ -77,7 +77,7 @@ const Tasks = observer(() => {
 
     return (
         <div style={{padding: '30px'}}>
-            <h1>Task</h1>
+            <h1>Tasks</h1>
 
             <div className={'task-wrapper'}>
                 {heads.map((head) => (

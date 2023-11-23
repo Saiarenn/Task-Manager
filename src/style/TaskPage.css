@@ -34,7 +34,7 @@
 }
 
 .todo-list {
-    background: white;
+    background: var(--item);
     font-size: 20px;
     min-width: 15em;
     margin: auto;

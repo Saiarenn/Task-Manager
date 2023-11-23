@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "../style/Navbar.css"
 import {LOGIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router-dom";
@@ -23,15 +23,9 @@ const Navbar = observer(() => {
         updateThemeVariables(!isDarkTheme);
     };
 
-    const root = document.documentElement;
-    root.style.setProperty('--desciption', '#768396');
-    root.style.setProperty('--research', '#2D72D9');
-    root.style.setProperty('--content', '#1AC6A5');
-    root.style.setProperty('--planning', '#F67D2D');
-    root.style.setProperty('--lightBlue', '#1EA7FF');
-    root.style.setProperty('--mainBlue', '#5051F9');
-
     const updateThemeVariables = (isDarkTheme) => {
+        const root = document.documentElement;
+
         if (isDarkTheme) {
             root.style.setProperty('--navbg', '#1E1F25');
             root.style.setProperty('--blue', '#FAFAFA');
@@ -65,7 +59,12 @@ const Navbar = observer(() => {
 
                 </button>
             </div>
-            <button onClick={toggleTheme}>Toggle Theme</button>
+            <div className="toggle-switch-container">
+                <label className="switch">
+                    <input type="checkbox" checked={isDarkTheme} onChange={toggleTheme} />
+                    <span className="slider"></span>
+                </label>
+            </div>
             {user.isAuth ?
                 <div className={"navlinks"}>
                     <button className={'loginButton'} onClick={logout}>Logout</button>

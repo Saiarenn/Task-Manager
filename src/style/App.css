@@ -11,7 +11,7 @@
     --content: #0ACF83;
     --planning: #FE7F2E;
     --addBg: #E8EAFF;
-    --plusBg: #E8EAFF;
+    --plusBg: #5051F9;
 }
 
 * {
@@ -37,4 +37,15 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.auth {
+    background: var(--item);
+    color: var(--blue);
+}
+
+.auth input{
+    background: var(--mainBg);
+    outline: none;
+    color: var(--blue);
 }

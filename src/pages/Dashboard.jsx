@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
 import '../style/Dashboard.css'
+import CustomTooltip from "../components/CustomTooltip";
 
 const Dashboard = () => {
     const [filter, setFilter] = useState('monthly')
@@ -31,43 +32,23 @@ const Dashboard = () => {
         return Array.from({length: 24}, (_, index) => (currentHour + index + 1) % 24);
     }
 
-    const monthlyData = reorderedMonths.map((month) => {
-        const tasks = Math.floor(200 + Math.random() * 200);
-        const expectedTasks = Math.floor(Math.max(tasks + (Math.random() - 0.5) * 200, 0));
-        return {
-            name: month,
-            tasks,
-            expectedTasks,
-            points: Math.floor(Math.random() * 50),
-        };
-    });
-
-    const weeklyData = getPreviousWeekdays().map((weekday) => {
-        const tasks = Math.floor(50 + Math.random() * 50);
-        const expectedTasks = Math.floor(Math.max(tasks + (Math.random() - 0.5) * 50, 0));
-        return {
-            name: weekday,
-            tasks,
-            expectedTasks,
-            points: Math.floor(Math.random() * 50),
-        };
-    });
-
-    const dailyData = getHoursArray().map((hour) => {
-        const tasks = Math.floor(7 + Math.random() * 7);
-        const expectedTasks = Math.floor(Math.max(tasks + (Math.random() - 0.5) * 7, 0));
-        return {
-            name: hour,
-            tasks,
-            expectedTasks,
-            points: Math.floor(Math.random() * 50),
-        };
-    });
+    const getData = (arr, multiplier) => {
+        return arr.map((_element) => {
+            const tasks = Math.floor(multiplier + Math.random() * multiplier);
+            const expectedTasks = Math.floor(Math.max(tasks + (Math.random() - 0.5) * multiplier, 0));
+            return {
+                name: _element,
+                tasks,
+                expectedTasks,
+                points: Math.floor(Math.random() * multiplier),
+            };
+        });
+    }
 
     const graphData = {
-        daily: dailyData,
-        weekly: weeklyData,
-        monthly: monthlyData
+        daily: getData(getHoursArray(), 7),
+        weekly: getData(getPreviousWeekdays(), 50),
+        monthly: getData(reorderedMonths, 200)
     }
 
     function getPreviousWeekdays() {
@@ -103,40 +84,38 @@ const Dashboard = () => {
                 </div>
 
             </div>
-            <div className={'flex-grow'}>
-                <ResponsiveContainer width="100%" height={400}>
-                    <LineChart data={graphData[filter]}>
-                        <CartesianGrid
-                            vertical={false}
-                            strokeWidth="1"
-                        />
-                        <XAxis
-                            dataKey="name"
-                            axisLine={false}
-                            tickLine={false}
-                            tickMargin={10}
-                        />
-                        <YAxis axisLine={false} tickLine={false} tickMargin={10}/>
-                        <Tooltip cursor={false}/>
-                        <Line
-                            type="monotone"
-                            dataKey="expectedTasks"
-                            stroke="#1EA7FF"
-                            strokeWidth="3"
-                            activeDot={{r: 8}}
-                            dot={{r: 6}}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="tasks"
-                            stroke="#5051F9"
-                            strokeWidth="3"
-                            activeDot={{r: 8}}
-                            dot={{r: 6}}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
+            <ResponsiveContainer width="100%" height={400}>
+                <LineChart data={graphData[filter]}>
+                    <CartesianGrid
+                        vertical={false}
+                        strokeWidth="1"
+                    />
+                    <XAxis
+                        dataKey="name"
+                        axisLine={false}
+                        tickLine={false}
+                        tickMargin={10}
+                    />
+                    <YAxis axisLine={false} tickLine={false} tickMargin={10}/>
+                    <Tooltip content={<CustomTooltip />} cursor={false}/>
+                    <Line
+                        type="monotone"
+                        dataKey="expectedTasks"
+                        stroke="#1EA7FF"
+                        strokeWidth="3"
+                        activeDot={{r: 8}}
+                        dot={{r: 6}}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="tasks"
+                        stroke="#5051F9"
+                        strokeWidth="3"
+                        activeDot={{r: 8}}
+                        dot={{r: 6}}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
 
         </div>
     );
