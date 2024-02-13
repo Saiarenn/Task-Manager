@@ -37,7 +37,7 @@ $authHost.interceptors.response.use(
         }
 
         return Promise.reject(error);
-    }
+    },
 )
 
 $authHost.interceptors.request.use(authInterceptor)

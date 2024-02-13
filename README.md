@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Task Manager Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Welcome to the Task Manager Web Application! This application is designed to help users efficiently manage their tasks,
+providing a user-friendly interface to add, edit, and monitor tasks in a systematic manner.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### 1. Task Management
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Add and Edit Tasks:** Users can easily add new tasks and edit existing ones, ensuring flexibility in managing their
+  to-do list.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Task Points:** Each task can be assigned a certain number of points, allowing users to prioritize and categorize
+  their tasks based on importance.
 
-### `npm test`
+### 2. Calendar Integration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Specialized Calendar:** Tasks are visualized on a specialized calendar, providing a clear overview of scheduled
+  activities.
 
-### `npm run build`
+- **Task Length on Calendar:** Tasks are represented on the calendar with varying lengths, reflecting their due dates
+  and durations.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Progress Tracking
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Task Progress Bar:** The calendar displays a progress bar showcasing the completion status of active tasks, measured
+  by their total points.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Dashboard
 
-### `npm run eject`
+![Dashboard View](./src/assets/bell.svg)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **User Activity Recording:** The dashboard provides insights into users' task completion trends, displaying activity
+  over the last 30 days, 7 days, and the past 24 hours.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. Task Details Page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Detailed Task View:** Users can access a dedicated Task page to view detailed information about each task, including
+  points, due date, and any additional notes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Edit Points:** Users can modify task points directly from the Task page, allowing for real-time adjustments.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Task Management:**
+    - Navigate to the "Tasks" page to add and prioritize tasks.
 
-### Code Splitting
+2. **Calendar View:**
+    - Explore the calendar to visualize tasks and their respective due dates.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. **Progress Tracking:**
+    - Monitor the progress bar on the calendar to assess the completion status of active tasks.
 
-### Analyzing the Bundle Size
+4. **Dashboard:**
+    - Access the dashboard to view and analyze your task completion history.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+5. **Task Details Page:**
+    - Click on individual tasks to access the Task page, where you can view details and make edits.
 
-### Making a Progressive Web App
+# Task Manager
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Task Manager is a simple React application to manage tasks.
 
-### Advanced Configuration
+## Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To run this project locally on your machine, follow these steps:
 
-### Deployment
+1. **Clone the repository**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    ```
+    git clone https://github.com/Saiarenn/Task-Manager.git
+    ```
 
-### `npm run build` fails to minify
+2. **Navigate to the project directory**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```
+    cd Task-Manager
+    ```
+
+3. **Install dependencies**:
+
+    ```
+    npm install
+    ```
+
+4. **Run the development server**:
+
+    ```
+    npm start
+    ```
+
+5. **Open the application in your browser**:
+
+   Once the development server is running, open [http://localhost:3000](http://localhost:3000) in your web browser.
+
+## Usage
+
+After following the installation steps above, you can start using the Task Manager application locally on your machine.
+
+## Contributing
+
+Contributions are welcome! Please follow the steps below:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/my-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add some feature'`).
+5. Push to the branch (`git push origin feature/my-feature`).
+6. Create a new Pull Request.
+
+
