@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import Modal from "react-bootstrap/Modal";
-import {Button, Form} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import {createTask, fetchTasks} from "../../http/TaskAPI";
@@ -38,7 +38,9 @@ const TaskModal = observer(({head, show, onHide}) => {
     const [info, setInfo] = useState({
         status: getStatusInt[head.title],
         type: 1, title: '',
-        taskDescription: '', start: formatDate(new Date(Date.now())),
+        taskDescription: '',
+        start: formatDate(new Date(Date.now())),
+        end: formatDate(new Date(Date.now() + 1)),
         img: '', points: [],
     })
 
@@ -56,6 +58,7 @@ const TaskModal = observer(({head, show, onHide}) => {
                 type: 1, title: '',
                 taskDescription: '',
                 start: formatDate(new Date(Date.now())),
+                end: formatDate(new Date(Date.now())),
                 img: '', points: [],
             });
             fetchTasks().then(data =>
@@ -127,11 +130,24 @@ const TaskModal = observer(({head, show, onHide}) => {
                             {errorMessage && (
                                 <div style={{color: "red"}}>{errorMessage}</div>
                             )}
-                            <Form.Control
-                                type='date'
-                                value={info.start}
-                                onChange={e => setInfo({...info, start: e.target.value})}
-                            />
+                            <Row className={'d-flex align-items-center'}>
+                                <Col>
+                                    <Form.Control
+                                        type='date'
+                                        value={info.start}
+                                        onChange={e => setInfo({...info, start: e.target.value})}
+                                    />
+                                </Col>
+                                to
+                                <Col>
+                                    <Form.Control
+                                        type='date'
+                                        value={info.end}
+                                        onChange={e => setInfo({...info, end: e.target.value})}
+                                    />
+                                </Col>
+                            </Row>
+
                             <Button
                                 variant={"outline-dark"}
                                 className="mt-3"

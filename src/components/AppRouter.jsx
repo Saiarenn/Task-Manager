@@ -18,8 +18,7 @@ const AppRouter = observer(() => {
             {publicRoutes.map(route =>
                 <Route key={route.path} path={route.path} element={<route.component />}/>
             )}
-            <Route path='/emailconfirmation' element={<EmailConfirmation />} />
-            <Route path='/*' element={<Navigate to='/calendar' />} />
+            {/*<Route path='/*' element={<Navigate to='/calendar' />} />*/}
         </Routes>
     );
 });

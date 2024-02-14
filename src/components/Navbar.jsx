@@ -1,13 +1,50 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "../style/Navbar.css"
 import {LOGIN_ROUTE} from "../utils/consts";
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
+import Cookies from 'js-cookie';
 
 const Navbar = observer(() => {
     const {user} = useContext(Context);
     const navigate = useNavigate();
+
+    const logout = () => {
+        user.setIsAuth(false)
+        localStorage.removeItem('token')
+        Cookies.remove('refreshToken')
+    }
+
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+    const toggleTheme = () => {
+        setIsDarkTheme((prevTheme) => !prevTheme);
+        updateThemeVariables(!isDarkTheme);
+    };
+
+    const updateThemeVariables = (isDarkTheme) => {
+        const root = document.documentElement;
+
+        if (isDarkTheme) {
+            root.style.setProperty('--navbg', '#1E1F25');
+            root.style.setProperty('--blue', '#FAFAFA');
+            root.style.setProperty('--menubg', '#1E1F25');
+            root.style.setProperty('--mainBg', '#131517');
+            root.style.setProperty('--item', '#1E1F25');
+            root.style.setProperty('--addBg', '#5051F9');
+            root.style.setProperty('--plusBg', 'white');
+        } else { //light
+            root.style.setProperty('--navbg', 'white');
+            root.style.setProperty('--blue', '#23235F');
+            root.style.setProperty('--menubg', '#FBFAFF');
+            root.style.setProperty('--mainBg', '#F3F4F8');
+            root.style.setProperty('--item', 'white');
+            root.style.setProperty('--addBg', '#E8EAFF');
+            root.style.setProperty('--plusBg', '#6772FE');
+        }
+    };
+
 
     return (
         <nav>
@@ -22,8 +59,17 @@ const Navbar = observer(() => {
 
                 </button>
             </div>
-
-            {!user.isAuth &&
+            <div className="toggle-switch-container">
+                <label className="switch">
+                    <input type="checkbox" checked={isDarkTheme} onChange={toggleTheme} />
+                    <span className="slider"></span>
+                </label>
+            </div>
+            {user.isAuth ?
+                <div className={"navlinks"}>
+                    <button className={'loginButton'} onClick={logout}>Logout</button>
+                </div>
+                :
                 <div className={"navlinks"}>
                     <button className={'loginButton'} onClick={() => navigate(LOGIN_ROUTE)}>Login</button>
                 </div>
